@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Team 4 Study Progress Management</string>
     <string name="hello">Hello!</string>
+    <string name="nihao">nihao</string>
 </resources>
