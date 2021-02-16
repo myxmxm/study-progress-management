@@ -8,35 +8,15 @@
         android:id="@+id/userName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Your username:"
+        android:hint="Please input your username:"
         />
     <EditText
         android:id="@+id/userPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="Your password:"
+        android:hint="Please input your password:"
         />
-    <EditText
-        android:id="@+id/schoolName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Your school's name:"
-        />
-    <EditText
-        android:id="@+id/degreeProgramme"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Your degree programme :"
-        />
-    <EditText
-        android:id="@+id/totalCredits"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Total credits of your programme:"
-        android:inputType="number"
-        />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"

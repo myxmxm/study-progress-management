@@ -16,16 +16,20 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private Boolean firstTime;
     private SharedPreferences sharedPreferences;
-    private EditText signUpName, signUpPassword, loginName, loginPassword;
+    private EditText signUpName, signUpPassword, userSchoolName, userDegreeProgramme, userTotalCredits, loginName, loginPassword;
     private Button okSignUpBtn, cancelSignUpBtn, okLoginBtn, cancelLoginBtn;
     private AlertDialog signUpDialog, loginDialog;
     private View signUpView, loginView;
     private LayoutInflater signUpLayoutInflater, loginLayoutInflater;
 
-    public static final String KEY_FIRST = "first";
-    public static final String KEY_NAME = "name";
+    public static final String KEY_FIRST = "firstTime";
+    public static final String KEY_USERNAME = "userName";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_MESSAGE = "message";
+    public static final String KEY_SCHOOL_NAME = "schoolName";
+    public static final String KEY_DEGREE_PROGRAMME = "degreeProgramme";
+    public static final String KEY_CREDITS = "credits";
+
 
 
     @Override
@@ -64,27 +68,38 @@ public class MainActivity extends AppCompatActivity {
         cancelSignUpBtn = (Button) signUpView.findViewById(R.id.cancle);
         signUpName = (EditText) signUpView.findViewById(R.id.userName);
         signUpPassword = (EditText) signUpView.findViewById(R.id.userPassword);
+        userSchoolName = (EditText) signUpView.findViewById(R.id.schoolName);
+        userDegreeProgramme = (EditText) signUpView.findViewById(R.id.degreeProgramme);
+        userTotalCredits = (EditText) signUpView.findViewById((R.id.totalCredits));
 
 
         okSignUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String signUpUserName = signUpName.getText().toString();
                 String signUpUserPassword = signUpPassword.getText().toString();
+                String schoolName = userSchoolName.getText().toString();
+                String degreeProgramme = userDegreeProgramme.getText().toString();
+                String totalCredits = userTotalCredits.getText().toString();
 
-                if(signUpUserName.trim().equals("") || signUpUserPassword.trim().equals("")){
-                    Toast.makeText(getApplicationContext(),"Username and Password can't be empty!", Toast.LENGTH_LONG).show();
 
+                if(signUpUserName.trim().equals("") || signUpUserPassword.trim().equals("") || schoolName.trim().equals("") || degreeProgramme.trim().equals("") || totalCredits.trim().equals("")){
+                    Toast.makeText(getApplicationContext(),"All registration fields have to be filled!", Toast.LENGTH_LONG).show();
+                    return;
                 }
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(KEY_NAME,signUpUserName);
+                editor.putString(KEY_USERNAME,signUpUserName);
                 editor.putString(KEY_PASSWORD, signUpUserPassword);
+                editor.putString(KEY_SCHOOL_NAME, schoolName);
+                editor.putString(KEY_DEGREE_PROGRAMME, degreeProgramme);
+                editor.putString(KEY_CREDITS, totalCredits);
                 editor.putBoolean(KEY_FIRST, false);
                 editor.commit();
 
                 Intent intent = new Intent(MainActivity.this, DisplayActivity.class) ;
-                String message = "Hello " + sharedPreferences.getString(KEY_NAME,"");
+                String message = "Hello " + sharedPreferences.getString(KEY_USERNAME,"");
                 intent.putExtra(KEY_MESSAGE,message);
                 startActivity(intent);
             }
@@ -105,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     private void loginDialog(){
 
         loginLayoutInflater = (LayoutInflater) LayoutInflater.from(this);
-        loginView = (View) loginLayoutInflater.inflate(R.layout.activity_sign_up_dialog, null);
+        loginView = (View) loginLayoutInflater.inflate(R.layout.activity_login_dialog, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Please login");
@@ -129,12 +144,12 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                String savedUserName = sharedPreferences.getString(KEY_NAME,"");
+                String savedUserName = sharedPreferences.getString(KEY_USERNAME,"");
                 String savedPassword = sharedPreferences.getString(KEY_PASSWORD, "");
 
                 if (loginUserName.trim().equals(savedUserName) && loginUserPassword.trim().equals(savedPassword)){
                     Intent intent = new Intent(MainActivity.this, DisplayActivity.class) ;
-                    String message = "Hello " + sharedPreferences.getString(KEY_NAME,"");
+                    String message = "Hello " + sharedPreferences.getString(KEY_USERNAME,"");
                     intent.putExtra(KEY_MESSAGE,message);
                     startActivity(intent);
                 }else{
