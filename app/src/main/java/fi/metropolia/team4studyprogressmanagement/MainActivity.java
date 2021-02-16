@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sharedPreferences = this.getSharedPreferences("date", Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("date", Context.MODE_PRIVATE);
         firstTime = sharedPreferences.getBoolean("first",true);
 
 
@@ -75,7 +75,11 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("password", signUpUserPassword);
                 editor.putBoolean("first", false);
                 editor.commit();
-                loginDialog();
+
+                Intent intent = new Intent(MainActivity.this, DisplayActivity.class) ;
+                String message = "Hello " + sharedPreferences.getString("name","");
+                intent.putExtra("message",message);
+                startActivity(intent);
             }
         });
 
@@ -120,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
 
                 String savedUserName = sharedPreferences.getString("name","");
                 String savedPassword = sharedPreferences.getString("password", "");
+
                 if (loginUserName.trim().equals(savedUserName) && loginUserPassword.trim().equals(savedPassword)){
-                    //signUpDialog.dismiss();
                     Intent intent = new Intent(MainActivity.this, DisplayActivity.class) ;
                     String message = "Hello " + sharedPreferences.getString("name","");
                     intent.putExtra("message",message);
