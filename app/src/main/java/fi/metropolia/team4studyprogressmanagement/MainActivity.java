@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = this.getSharedPreferences("date", Context.MODE_PRIVATE);
         firstTime = sharedPreferences.getBoolean("first",true);
 
+
         if(firstTime){
             registrationDialog();
             return;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 String signUpUserPassword = signUpPassword.getText().toString();
 
                 if(signUpUserName.trim().equals("") || signUpUserPassword.trim().equals("")){
-                    Toast.makeText(MainActivity.this,"Username and Password can't be empty!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Username and Password can't be empty!", Toast.LENGTH_LONG).show();
 
                 }
 
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 String loginUserPassword = loginPassword.getText().toString();
 
                 if (loginUserName.trim().equals("") || loginUserPassword.trim().equals("")){
-                    Toast.makeText(MainActivity.this, "Username and Password can't be empty!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Username and Password can't be empty!", Toast.LENGTH_LONG).show();
                     return;
                 }
 
