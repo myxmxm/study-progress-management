@@ -22,13 +22,19 @@ public class MainActivity extends AppCompatActivity {
     private View signUpView, loginView;
     private LayoutInflater signUpLayoutInflater, loginLayoutInflater;
 
+    public static final String KEY_FIRST = "first";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_MESSAGE = "message";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sharedPreferences = getSharedPreferences("date", Context.MODE_PRIVATE);
-        firstTime = sharedPreferences.getBoolean("first",true);
+        sharedPreferences = getSharedPreferences("USER_DATE", Context.MODE_PRIVATE);
+        firstTime = sharedPreferences.getBoolean(KEY_FIRST,true);
 
 
         if(firstTime){
@@ -43,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void registrationDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         signUpLayoutInflater = (LayoutInflater) LayoutInflater.from(this);
         signUpView = (View) signUpLayoutInflater.inflate(R.layout.activity_sign_up_dialog, null);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Please register");
         builder.setView(signUpView);
         signUpDialog = builder.create();
@@ -71,14 +78,14 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("name",signUpUserName);
-                editor.putString("password", signUpUserPassword);
-                editor.putBoolean("first", false);
+                editor.putString(KEY_NAME,signUpUserName);
+                editor.putString(KEY_PASSWORD, signUpUserPassword);
+                editor.putBoolean(KEY_FIRST, false);
                 editor.commit();
 
                 Intent intent = new Intent(MainActivity.this, DisplayActivity.class) ;
-                String message = "Hello " + sharedPreferences.getString("name","");
-                intent.putExtra("message",message);
+                String message = "Hello " + sharedPreferences.getString(KEY_NAME,"");
+                intent.putExtra(KEY_MESSAGE,message);
                 startActivity(intent);
             }
         });
@@ -95,12 +102,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void loginDialog(){
+    private void loginDialog(){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         loginLayoutInflater = (LayoutInflater) LayoutInflater.from(this);
         loginView = (View) loginLayoutInflater.inflate(R.layout.activity_sign_up_dialog, null);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Please login");
         builder.setView(loginView);
         loginDialog = builder.create();
@@ -122,13 +129,13 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                String savedUserName = sharedPreferences.getString("name","");
-                String savedPassword = sharedPreferences.getString("password", "");
+                String savedUserName = sharedPreferences.getString(KEY_NAME,"");
+                String savedPassword = sharedPreferences.getString(KEY_PASSWORD, "");
 
                 if (loginUserName.trim().equals(savedUserName) && loginUserPassword.trim().equals(savedPassword)){
                     Intent intent = new Intent(MainActivity.this, DisplayActivity.class) ;
-                    String message = "Hello " + sharedPreferences.getString("name","");
-                    intent.putExtra("message",message);
+                    String message = "Hello " + sharedPreferences.getString(KEY_NAME,"");
+                    intent.putExtra(KEY_MESSAGE,message);
                     startActivity(intent);
                 }else{
                     Toast.makeText(MainActivity.this, "Username or Password wrong!", Toast.LENGTH_LONG).show();
