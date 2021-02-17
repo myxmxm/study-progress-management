@@ -22,16 +22,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItemCourse"
                 android:icon="@drawable/course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Course"/>
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItemTools"
                 android:icon="@drawable/tools"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tools"/>
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItemStatistic"
                 android:icon="@drawable/statistic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
