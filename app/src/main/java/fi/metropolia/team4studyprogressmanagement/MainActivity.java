@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String KEY_SCHOOL_NAME = "schoolName";
     public static final String KEY_DEGREE_PROGRAMME = "degreeProgramme";
     public static final String KEY_CREDITS = "credits";
+
+    public static final String TAG = "mytag";
 
 
 
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(signUpUserName.trim().equals("") || signUpUserPassword.trim().equals("") || schoolName.trim().equals("") || degreeProgramme.trim().equals("") || totalCredits.trim().equals("")){
                     Toast.makeText(getApplicationContext(),"All registration fields have to be filled!", Toast.LENGTH_LONG).show();
+                    Log.d(TAG,"Toast");
                     return;
                 }
 
@@ -141,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (loginUserName.trim().equals("") || loginUserPassword.trim().equals("")){
                     Toast.makeText(getApplicationContext(), "Username and Password can't be empty!", Toast.LENGTH_LONG).show();
+                    Log.d(TAG,"Toast");
                     return;
                 }
 
