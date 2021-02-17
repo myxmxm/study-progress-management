@@ -18,17 +18,21 @@
             />
 
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.tabs.TabItem
+                android:icon="@drawable/course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Course"/>
             <com.google.android.material.tabs.TabItem
+                android:icon="@drawable/tools"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add and Search"/>
+                android:text="Tools"/>
             <com.google.android.material.tabs.TabItem
+                android:icon="@drawable/statistic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Statistic"/>
@@ -36,5 +40,11 @@
         </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
