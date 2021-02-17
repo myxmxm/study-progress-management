@@ -1,4 +1,4 @@
-package fi.metropolia.team4studyprogressmanagement;
+package fi.metropolia.team4studyprogressmanagement.fragment;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import fi.metropolia.team4studyprogressmanagement.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StatisticFragment#newInstance} factory method to
+ * Use the {@link ToolsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StatisticFragment extends Fragment {
+public class ToolsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class StatisticFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public StatisticFragment() {
+    public ToolsFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class StatisticFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StatisticFragment.
+     * @return A new instance of fragment ToolsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StatisticFragment newInstance(String param1, String param2) {
-        StatisticFragment fragment = new StatisticFragment();
+    public static ToolsFragment newInstance(String param1, String param2) {
+        ToolsFragment fragment = new ToolsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class StatisticFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistic, container, false);
+        return inflater.inflate(R.layout.fragment_tools, container, false);
     }
 }

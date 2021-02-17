@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import fi.metropolia.team4studyprogressmanagement.fragment.CourseFragment;
+import fi.metropolia.team4studyprogressmanagement.fragment.StatisticFragment;
+import fi.metropolia.team4studyprogressmanagement.fragment.ToolsFragment;
+
 public class PagerAdapter extends FragmentPagerAdapter {
 
     private int numberOfTabs;
