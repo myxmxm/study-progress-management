@@ -102,10 +102,9 @@ public class MainActivity extends AppCompatActivity {
                 editor.putBoolean(KEY_FIRST, false);
                 editor.commit();
 
-                Intent intent = new Intent(MainActivity.this, DisplayActivity.class) ;
-                String message = "Hello " + sharedPreferences.getString(KEY_USERNAME,"");
-                intent.putExtra(KEY_MESSAGE,message);
-                startActivity(intent);
+                signUpDialog.dismiss();
+
+                loginDialog();
             }
         });
 
