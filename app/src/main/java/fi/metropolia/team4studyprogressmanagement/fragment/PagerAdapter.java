@@ -1,4 +1,4 @@
-package fi.metropolia.team4studyprogressmanagement;
+package fi.metropolia.team4studyprogressmanagement.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
