@@ -13,6 +13,9 @@ public class Collection {
 
     private  Collection() {
         this.courses = new ArrayList<>();
+        this.courses.add(new Course("Math",4,3,2,"Hard"));
+        this.courses.add(new Course("Physics",2,3,1,"Easy"));
+        this.courses.add(new Course("IT",5,10,3,"Hard"));
     }
 
     public List<Course> getAllCourse(){
