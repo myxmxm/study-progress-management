@@ -14,7 +14,7 @@
         android:id="@+id/userPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="textPassword"
         android:hint="Please input your password:"
         />
     <LinearLayout
