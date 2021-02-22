@@ -18,7 +18,7 @@ import android.widget.Toast;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private Boolean firstTime;
+    private Boolean firstTimeOpenApp;
     private SharedPreferences sharedPreferences;
     private EditText signUpName, signUpPassword, userSchoolName, userDegreeProgramme, userTotalCredits, loginName, loginPassword;
     private Button okSignUpBtn, cancelSignUpBtn, okLoginBtn, cancelLoginBtn;
@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sharedPreferences = getSharedPreferences("USER_DATE", Context.MODE_PRIVATE);
-        firstTime = sharedPreferences.getBoolean(KEY_FIRST,true);
+        firstTimeOpenApp = sharedPreferences.getBoolean(KEY_FIRST,true);
 
-        if(firstTime){
+        if(firstTimeOpenApp){
             signUpDialog();
             return;
         }else{
