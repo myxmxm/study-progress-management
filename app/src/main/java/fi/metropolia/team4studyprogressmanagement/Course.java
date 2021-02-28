@@ -1,12 +1,33 @@
 package fi.metropolia.team4studyprogressmanagement;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+
+@Entity
 public class Course {
 
-    private String courseName, courseDetail;
-    private int grade, credit, semester;
+    @PrimaryKey (autoGenerate = true)
+    private int id;
+
+    @ColumnInfo(name = "course_name")
+    private String courseName;
+
+    @ColumnInfo(name = "course_detail")
+    private String courseDetail;
+
+    @ColumnInfo(name = "course_semester")
+    private int semester;
+
+    @ColumnInfo(name = "course_grade")
+    private int grade;
+
+    @ColumnInfo(name = "course_credit")
+    private int credit;
 
 
-    public Course(String courseName, int grade, int credit, int semester, String courseDetail) {
+    public Course(String courseName, int semester, int grade, int credit, String courseDetail) {
         this.courseName = courseName;
         this.courseDetail = courseDetail;
         this.grade = grade;
@@ -38,6 +59,6 @@ public class Course {
 
     @Override
     public String toString() {
-        return this.courseName + " semester " + this.semester;
+        return "Course ID: " + id + ", Courser name: " + this.courseName ;
     }
 }
