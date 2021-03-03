@@ -6,18 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
     private Boolean firstTimeOpenApp;
     private SharedPreferences sharedPreferences;
     private EditText signUpName, signUpPassword, userSchoolName, userDegreeProgramme, userTotalCredits, loginName, loginPassword;
@@ -41,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         sharedPreferences = getSharedPreferences("USER_DATE", Context.MODE_PRIVATE);
         firstTimeOpenApp = sharedPreferences.getBoolean(KEY_FIRST,true);
@@ -69,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         signUpDialog.show();
 
 
-        okSignUpBtn = (Button) signUpView.findViewById(R.id.ok);
+        okSignUpBtn = (Button) signUpView.findViewById(R.id.okInputBtn);
         cancelSignUpBtn = (Button) signUpView.findViewById(R.id.cancle);
 
 
@@ -84,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signUpDialog.dismiss();
-                MainActivity.this.finish();
+                LogInActivity.this.finish();
 
             }
         });
@@ -103,13 +99,16 @@ public class MainActivity extends AppCompatActivity {
         loginDialog = builder.create();
         loginDialog.show();
 
-        okLoginBtn = (Button) loginView.findViewById(R.id.ok);
+        okLoginBtn = (Button) loginView.findViewById(R.id.okInputBtn);
         cancelLoginBtn = (Button) loginView.findViewById(R.id.cancle);
 
         okLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 verification();
+                SharedPreferences preGet = getSharedPreferences("USER_DATE", Context.MODE_PRIVATE);
+                String toast = "Welcome back " + preGet.getString(KEY_USERNAME,"") + "!";
+                showToast(toast);
             }
         });
 
@@ -117,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signUpDialog.dismiss();
-                MainActivity.this.finish();
+                LogInActivity.this.finish();
             }
         });
 
@@ -177,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         String savedPassword = sharedPreferences.getString(KEY_PASSWORD, "");
 
         if (loginUserName.trim().equals(savedUserName) && loginUserPassword.trim().equals(savedPassword)){
-            Intent intent = new Intent(MainActivity.this, DisplayActivity.class) ;
+            Intent intent = new Intent(LogInActivity.this, TabActivity.class) ;
             startActivity(intent);
         }else{
             showToast("Username or Password wrong");
@@ -187,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void showToast(String message){
+    private void showToast(String message){
         Toast toast = Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT);
         toast.show();
     }
