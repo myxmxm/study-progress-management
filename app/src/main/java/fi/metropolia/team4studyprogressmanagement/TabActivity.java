@@ -1,25 +1,18 @@
 package fi.metropolia.team4studyprogressmanagement;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
-import java.util.List;
+import fi.metropolia.team4studyprogressmanagement.fragment.PagerAdapter;
 
-public class DisplayActivity extends AppCompatActivity {
+public class TabActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ViewPager viewPager;
@@ -31,7 +24,7 @@ public class DisplayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display);
+        setContentView(R.layout.activity_tab);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,11 +55,5 @@ public class DisplayActivity extends AppCompatActivity {
 
             }
         });
-
-        /*TextView textView = findViewById(R.id.textView);
-
-        Intent intent = getIntent();
-        String message1 = intent.getStringExtra(MainActivity.KEY_MESSAGE);
-        textView.setText(message1);*/
     }
 }
