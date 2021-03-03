@@ -26,39 +26,64 @@ public class Course {
     @ColumnInfo(name = "course_credit")
     private int credit;
 
-
-    public Course(String courseName, int semester, int grade, int credit, String courseDetail) {
+    public Course(String courseName, int semester, int grade, int credit,String courseDetail) {
         this.courseName = courseName;
         this.courseDetail = courseDetail;
+        this.semester = semester;
         this.grade = grade;
         this.credit = credit;
-        this.semester = semester;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getCourseName() {
         return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public String getCourseDetail() {
         return courseDetail;
     }
 
-    public int getGrade() {
-        return grade;
-    }
-
-    public int getCredit() {
-        return credit;
+    public void setCourseDetail(String courseDetail) {
+        this.courseDetail = courseDetail;
     }
 
     public int getSemester() {
         return semester;
     }
 
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
+    }
+
     @Override
     public String toString() {
-        return "Course ID: " + id + ", Courser name: " + this.courseName ;
+        return "ID: " + id + ", " + this.courseName ;
     }
 }
