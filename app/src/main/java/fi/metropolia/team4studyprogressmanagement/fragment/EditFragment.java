@@ -12,13 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import fi.metropolia.team4studyprogressmanagement.CourseListActivity;
-import fi.metropolia.team4studyprogressmanagement.MainActivity;
+import fi.metropolia.team4studyprogressmanagement.LogInActivity;
 import fi.metropolia.team4studyprogressmanagement.R;
+import fi.metropolia.team4studyprogressmanagement.TabActivity;
 
 
-public class CourseFragment extends Fragment {
+public class EditFragment extends Fragment {
 
     private Button updateInfo, courseList;
     private EditText editUserName, editPassword, editSchoolName, editDegreeProgramme, editTotalCredits;
@@ -27,7 +29,7 @@ public class CourseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_course, container, false);
+        return inflater.inflate(R.layout.fragment_edit, container, false);
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -55,11 +57,11 @@ public class CourseFragment extends Fragment {
 
     private void getUserInfo(){
         SharedPreferences preGet = getActivity().getSharedPreferences("USER_DATE", Context.MODE_PRIVATE);
-        String username = preGet.getString(MainActivity.KEY_USERNAME,"");
-        String password = preGet.getString(MainActivity.KEY_PASSWORD,"");
-        String schoolName = preGet.getString(MainActivity.KEY_SCHOOL_NAME,"");
-        String degreeProgramme = preGet.getString(MainActivity.KEY_DEGREE_PROGRAMME,"");
-        String totalCredits = preGet.getString(MainActivity.KEY_CREDITS,"");
+        String username = preGet.getString(LogInActivity.KEY_USERNAME,"");
+        String password = preGet.getString(LogInActivity.KEY_PASSWORD,"");
+        String schoolName = preGet.getString(LogInActivity.KEY_SCHOOL_NAME,"");
+        String degreeProgramme = preGet.getString(LogInActivity.KEY_DEGREE_PROGRAMME,"");
+        String totalCredits = preGet.getString(LogInActivity.KEY_CREDITS,"");
 
         editUserName.setText(username);
         editPassword.setText(password);
@@ -81,13 +83,15 @@ public class CourseFragment extends Fragment {
             String newDegreeProgramme = editDegreeProgramme.getText().toString();
             String newTotalCredits = editTotalCredits.getText().toString();
 
-            editor.putString(MainActivity.KEY_USERNAME,newUserName);
-            editor.putString(MainActivity.KEY_PASSWORD,newPassword);
-            editor.putString(MainActivity.KEY_SCHOOL_NAME,newSchoolName);
-            editor.putString(MainActivity.KEY_DEGREE_PROGRAMME,newDegreeProgramme);
-            editor.putString(MainActivity.KEY_CREDITS,newTotalCredits);
+            editor.putString(LogInActivity.KEY_USERNAME,newUserName);
+            editor.putString(LogInActivity.KEY_PASSWORD,newPassword);
+            editor.putString(LogInActivity.KEY_SCHOOL_NAME,newSchoolName);
+            editor.putString(LogInActivity.KEY_DEGREE_PROGRAMME,newDegreeProgramme);
+            editor.putString(LogInActivity.KEY_CREDITS,newTotalCredits);
 
             editor.commit();
+
+            showToast("Your information has been updated!");
 
         }
     };
@@ -100,4 +104,9 @@ public class CourseFragment extends Fragment {
 
         }
     };
+
+    private void showToast(String message){
+        Toast toast = Toast.makeText(getActivity(), message,Toast.LENGTH_SHORT);
+        toast.show();
+    }
 }
