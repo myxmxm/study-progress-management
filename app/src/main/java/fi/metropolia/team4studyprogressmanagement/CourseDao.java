@@ -15,10 +15,10 @@ public interface CourseDao {
     void insertCourse(Course... courses);
 
     @Update
-    void updateCourse(Course... courses);
+    void updateCourse(Course course);
 
     @Delete
-    void  deleteCourse(Course... courses);
+    void  deleteCourse(Course course);
 
     @Query("DELETE FROM Course")
     void deleteAllCourse();
@@ -44,20 +44,29 @@ public interface CourseDao {
     @Query("SELECT SUM(course_credit) FROM Course")
     int getTotalCredits();
 
+    @Query("SELECT SUM(course_grade) FROM Course")
+    int getTotalGrade();
+
     @Query("SELECT SUM(course_credit) FROM Course WHERE course_semester = (:semester)")
     int getTotalCreditsBySemester(int semester);
 
     @Query("SELECT course_name FROM Course WHERE course_semester = (:semester)")
-    List<Integer> getCourseNameBySemester(int semester);
+    List<String> getCourseNameBySemester(int semester);
 
     @Query("SELECT course_name FROM Course WHERE course_grade = (:grade)")
-    List<Integer> getCourseNameByGrade(int grade);
+    List<String> getCourseNameByGrade(int grade);
 
     @Query("SELECT course_name FROM Course WHERE course_credit = (:credit)")
-    List<Integer> getCourseNameByCredit(int credit);
+    List<String> getCourseNameByCredit(int credit);
 
     @Query("SELECT id FROM Course WHERE course_name = (:CourseName)")
     int getCourseIdByCourseName(String CourseName);
+
+    @Query("SELECT course_name FROM Course")
+    List<String> getAllCourseName();
+
+    @Query("SELECT course_credit FROM Course WHERE course_name = (:CourseName)")
+    int getCreditByCourseName(String CourseName);
 
 
 }
