@@ -42,14 +42,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         >
+
         <Button
-            android:id="@+id/ok"
+            android:id="@+id/okInputBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ok"
             android:layout_weight="1"
-            android:textSize="20sp"
-            />
+            android:text="Submit"
+            android:textSize="20sp" />
         <Button
             android:id="@+id/cancle"
             android:layout_width="wrap_content"
