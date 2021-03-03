@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayActivity">
-    
+    tools:context=".TabActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,6 +17,7 @@
             android:background="@android:color/white"
             />
 
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -26,13 +27,13 @@
                 android:icon="@drawable/course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Course"/>
+                android:text="Edit"/>
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabItemTools"
                 android:icon="@drawable/tools"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tools"/>
+                android:text="Search"/>
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabItemStatistic"
                 android:icon="@drawable/statistic"
