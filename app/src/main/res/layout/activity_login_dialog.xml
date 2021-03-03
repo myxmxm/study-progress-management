@@ -8,28 +8,28 @@
         android:id="@+id/userName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Please input your username:"
+        android:hint="USERNAME:"
         />
     <EditText
         android:id="@+id/userPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="Please input your password:"
+        android:hint="PASSWORD:"
         />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         >
+
         <Button
-            android:id="@+id/ok"
+            android:id="@+id/okInputBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ok"
             android:layout_weight="1"
-            android:textSize="20sp"
-            />
+            android:text="   login "
+            android:textSize="20sp" />
         <Button
             android:id="@+id/cancle"
             android:layout_width="wrap_content"
