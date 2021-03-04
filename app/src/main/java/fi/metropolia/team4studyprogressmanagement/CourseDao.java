@@ -68,5 +68,8 @@ public interface CourseDao {
     @Query("SELECT course_credit FROM Course WHERE course_name = (:CourseName)")
     int getCreditByCourseName(String CourseName);
 
+    @Query("SELECT course_semester FROM Course")
+    List<Integer> getEverySemesterValue();
+
 
 }
