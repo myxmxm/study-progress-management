@@ -13,6 +13,13 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Firstly, This activity will shows detailed information about each course inserted by user from
+ * CourseListActivity
+ * Secondly, users are able to re-edit every information about the course except course Id
+ * Thirdly, users can click delete button to delete any course that they don't want to be stored
+ * in database.
+ */
 
 public class CourseDetailsActivity extends AppCompatActivity {
 
@@ -28,18 +35,16 @@ public class CourseDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details);
 
-
-        courseDatabase = CourseDatabase.getInstance(this);
-        courseDao = courseDatabase.getCourseDao();
-
         initialization();
+
         getCourseInfo ();
 
         buttonUpdateCourse.setOnClickListener(updateCourse);
+
         buttonDeleteCourse.setOnClickListener(deleteCourse);
 
     }
-
+//initialize the widgets and build database access
     private void initialization () {
         courseName = (EditText) findViewById(R.id.courseName);
         courseSemester = (EditText) findViewById(R.id.courseSemester);
@@ -49,17 +54,22 @@ public class CourseDetailsActivity extends AppCompatActivity {
         courseId = (TextView) findViewById(R.id.courseId);
         buttonUpdateCourse = (Button) findViewById(R.id.buttonUpdateCourse);
         buttonDeleteCourse = (Button) findViewById(R.id.buttonDeleteCourse);
-    }
 
+        courseDatabase = CourseDatabase.getInstance(this);
+        courseDao = courseDatabase.getCourseDao();
+    }
+//retrieve all information to a specific course from database
     private void getCourseInfo () {
+//receive the all text content(a string mixed with number and characters) of the specific list item
+// which is clicked by user from the ListView in previous CourseListActivity
         Intent intent = getIntent();
         String listContent = intent.getStringExtra(CourseListActivity.KEY);
-
+//extract number for string, which is an Id of specific course
         String regEx="[^0-9]";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(listContent);
-
         listCourseId = Integer.parseInt(m.replaceAll("").trim());
+//use this course to query other corresponding information about this course
         String listCourseName = courseDao.getCourseNameById(listCourseId);
         String listCourseDetail = courseDao.getCourseDetailById(listCourseId);
         int semester = courseDao.getCourseSemesterById(listCourseId);
@@ -73,7 +83,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
         courseDetail.setText(listCourseDetail);
         courseId.setText(String.valueOf(listCourseId));
     }
-
+//OnClickListener for updateCourse button
     private View.OnClickListener updateCourse = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -90,7 +100,7 @@ public class CourseDetailsActivity extends AppCompatActivity {
             //CourseDetailsActivity.this.finish();
         }
     };
-
+// OnClickListener for deleteCourse button
     private View.OnClickListener deleteCourse = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -98,10 +108,11 @@ public class CourseDetailsActivity extends AppCompatActivity {
             course.setId(listCourseId);
             courseDao.deleteCourse(course);
             showToast("This course has been deleted!");
+//after showing toast message, this activity will be finished.
             CourseDetailsActivity.this.finish();
         }
     };
-
+// method for using Toast message more conveniently
     private void showToast(String message){
         Toast toast = Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT);
         toast.show();
