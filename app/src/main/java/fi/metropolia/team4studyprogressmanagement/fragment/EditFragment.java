@@ -19,11 +19,20 @@ import fi.metropolia.team4studyprogressmanagement.LogInActivity;
 import fi.metropolia.team4studyprogressmanagement.R;
 import fi.metropolia.team4studyprogressmanagement.TabActivity;
 
+/**
+ * The first main purpose of this fragment is to allow user to edit the information they have provided
+ * during registration process, such as username, password.
+ * The second purpose of this fragment is to give user accessibility to edit their course list,
+ * when user click the corresponding button, they will be taken to course list activity.
+ *
+ */
+
 
 public class EditFragment extends Fragment {
 
     private Button updateInfo, courseList;
     private EditText editUserName, editPassword, editSchoolName, editDegreeProgramme, editTotalCredits;
+    private SharedPreferences preGet;
 
 
 
@@ -44,7 +53,7 @@ public class EditFragment extends Fragment {
         courseList.setOnClickListener(checkCourseList);
 
     }
-
+// initialize all widgets and access to sharedPreference
     private void initialization(){
         updateInfo = (Button) getActivity().findViewById(R.id.updateInfo);
         courseList = (Button) getActivity().findViewById(R.id.courseList);
@@ -53,10 +62,11 @@ public class EditFragment extends Fragment {
         editSchoolName = (EditText) getView().findViewById(R.id.editSchoolName);
         editDegreeProgramme = (EditText) getView().findViewById(R.id.editDegreeProgramme);
         editTotalCredits = (EditText) getView().findViewById(R.id.editTotalCredits);
-    }
 
+        preGet = getActivity().getSharedPreferences("USER_DATE", Context.MODE_PRIVATE);
+    }
+//read information from sharedPreference which provided by user during registration.
     private void getUserInfo(){
-        SharedPreferences preGet = getActivity().getSharedPreferences("USER_DATE", Context.MODE_PRIVATE);
         String username = preGet.getString(LogInActivity.KEY_USERNAME,"");
         String password = preGet.getString(LogInActivity.KEY_PASSWORD,"");
         String schoolName = preGet.getString(LogInActivity.KEY_SCHOOL_NAME,"");
@@ -70,11 +80,11 @@ public class EditFragment extends Fragment {
         editTotalCredits.setText(totalCredits);
 
     }
-
+//create onClickListener for updateUserInfo button
     private View.OnClickListener updateUserInfo = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            SharedPreferences preGet = getActivity().getSharedPreferences("USER_DATE", Context.MODE_PRIVATE);
+//save updated information to sharedPreference
             SharedPreferences.Editor editor = preGet.edit();
 
             String newUserName = editUserName.getText().toString();
@@ -95,7 +105,7 @@ public class EditFragment extends Fragment {
 
         }
     };
-
+//create onClickListener for checkCourseList button
     private View.OnClickListener checkCourseList = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -104,7 +114,7 @@ public class EditFragment extends Fragment {
 
         }
     };
-
+//method for using toast message more conveniently
     private void showToast(String message){
         Toast toast = Toast.makeText(getActivity(), message,Toast.LENGTH_SHORT);
         toast.show();

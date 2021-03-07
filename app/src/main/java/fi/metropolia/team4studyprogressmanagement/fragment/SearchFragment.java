@@ -19,10 +19,15 @@ import fi.metropolia.team4studyprogressmanagement.CourseDao;
 import fi.metropolia.team4studyprogressmanagement.CourseDatabase;
 import fi.metropolia.team4studyprogressmanagement.R;
 
+/**
+ * From this fragment we give user several option to query their course related data, for instance,
+ * user will be able to find the course name by specific grade, credit, and semester.
+ */
+
 
 public class SearchFragment extends Fragment {
 
-    private Button courseBySemesterBtn,creditsBySemesterBtn,courseByGradeBtn,courseByCreditsBtn;
+    private Button courseBySemesterBtn,courseByGradeBtn,courseByCreditsBtn;
     private EditText CreditsEditText;
     private TextView resultTextView;
     private RadioGroup semesterGroup, gradeGroup;
@@ -38,32 +43,29 @@ public class SearchFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        courseDatabase = CourseDatabase.getInstance(getActivity());
-        courseDao = courseDatabase.getCourseDao();
-
         initialization ();
 
         courseBySemesterBtn.setOnClickListener(courseBySemester);
 
         courseByGradeBtn.setOnClickListener(courseByGrade);
 
-        creditsBySemesterBtn.setOnClickListener(creditsBySemester);
-
         courseByCreditsBtn.setOnClickListener(courseByCredits);
 
     }
-
+//initialize the widgets and build database access
     private void initialization () {
         resultTextView = (TextView) getView().findViewById(R.id.resultTextView);
         semesterGroup = (RadioGroup) getActivity().findViewById(R.id.semesterGroup);
         gradeGroup = (RadioGroup) getActivity().findViewById(R.id.gradeGroup);
         CreditsEditText = (EditText) getView().findViewById(R.id.CreditsEditText);
         courseBySemesterBtn = (Button) getActivity().findViewById(R.id.courseBySemesterBtn);
-        creditsBySemesterBtn = (Button) getActivity().findViewById(R.id.creditsBySemesterBtn);
         courseByGradeBtn = (Button) getActivity().findViewById(R.id.courseByGradeBtn);
         courseByCreditsBtn = (Button) getActivity().findViewById(R.id.courseByCreditsBtn);
-    }
 
+        courseDatabase = CourseDatabase.getInstance(getActivity());
+        courseDao = courseDatabase.getCourseDao();
+    }
+//set OnClickListener for all three query buttons
     private  View.OnClickListener courseByGrade = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -82,21 +84,6 @@ public class SearchFragment extends Fragment {
         }
     };
 
-    private  View.OnClickListener creditsBySemester = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            chosenSemester();
-            if(chosenSemester != 1 && chosenSemester != 2 && chosenSemester != 3 && chosenSemester != 4){
-                resultTextView.setText("Please select a semester before searching!");
-                return;
-            }
-            resultTextView.setText("");
-            int creditsSum = courseDao.getTotalCreditsBySemester(chosenSemester);
-            resultTextView.setText(String.valueOf("   " + creditsSum)+" credits.");
-
-            creditsSum = 0;
-        }
-    };
 
     private  View.OnClickListener courseByCredits = new View.OnClickListener() {
         @Override
@@ -105,7 +92,7 @@ public class SearchFragment extends Fragment {
 
         }
     };
-
+//query a list of course name according to integer number chosenSemester from method chosenSemester()
     private void getCoursesBySemester(){
         if(chosenSemester != 1 && chosenSemester != 2 && chosenSemester != 3 && chosenSemester != 4){
             resultTextView.setText("Please select a semester before searching!");
@@ -124,7 +111,7 @@ public class SearchFragment extends Fragment {
 
         text = "";
     }
-
+//query a list of course name according to integer number chosenGrade from method chosenGrade()
     private void getCoursesByGrade(){
 
         if(chosenGrade != 1 && chosenGrade != 2 && chosenGrade != 3 && chosenGrade != 4 && chosenGrade != 5){
@@ -143,7 +130,7 @@ public class SearchFragment extends Fragment {
 
         text = "";
     }
-
+//query a list of course name according to the credit number read from EditText CreditsEditText
     private void getCoursesByCredits(){
         String credit = CreditsEditText.getText().toString();
         if(credit.trim().equals("")){
@@ -162,7 +149,7 @@ public class SearchFragment extends Fragment {
 
         text = "";
     }
-
+//return the integer number chosenSemester when using clicks corresponding radioButton
     private int chosenSemester(){
         int checkId = semesterGroup.getCheckedRadioButtonId();
         switch (checkId){
@@ -187,7 +174,7 @@ public class SearchFragment extends Fragment {
 
         return chosenSemester;
     }
-
+//return the integer number chosenGrade when using clicks corresponding radioButton
     private int chosenGrade(){
         int checkId = gradeGroup.getCheckedRadioButtonId();
         switch (checkId){
