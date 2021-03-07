@@ -4,28 +4,31 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * create entity class for room database
+ */
 
 @Entity
 public class Course {
-
+//set auto generated course id as primary key
     @PrimaryKey (autoGenerate = true)
     private int id;
-
+//set course name as column
     @ColumnInfo(name = "course_name")
     private String courseName;
-
+//set course detail as column
     @ColumnInfo(name = "course_detail")
     private String courseDetail;
-
+//set semester as column
     @ColumnInfo(name = "course_semester")
     private int semester;
-
+//set grade as column
     @ColumnInfo(name = "course_grade")
     private int grade;
-
+//set credit as column
     @ColumnInfo(name = "course_credit")
     private int credit;
-
+//create constructor
     public Course(String courseName, int semester, int grade, int credit,String courseDetail) {
         this.courseName = courseName;
         this.courseDetail = courseDetail;
@@ -33,7 +36,7 @@ public class Course {
         this.grade = grade;
         this.credit = credit;
     }
-
+// create set and get methods
     public int getId() {
         return id;
     }
@@ -81,7 +84,7 @@ public class Course {
     public void setCredit(int credit) {
         this.credit = credit;
     }
-
+//create toString method
     @Override
     public String toString() {
         return "ID: " + id + ", " + this.courseName ;
