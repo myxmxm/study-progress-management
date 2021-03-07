@@ -8,7 +8,10 @@ import androidx.room.Update;
 
 import java.util.List;
 
-
+/**
+ * create database access object and some methods which are needed to edit and query the data
+ * from room database
+ */
 @Dao
 public interface CourseDao {
     @Insert
@@ -70,6 +73,20 @@ public interface CourseDao {
 
     @Query("SELECT course_semester FROM Course")
     List<Integer> getEverySemesterValue();
+
+    @Query("SELECT course_grade FROM Course")
+    List<Integer> getAllCourseGrade();
+
+    @Query("SELECT course_credit FROM Course")
+    List<Integer> getAllCourseCredit();
+
+    @Query("SELECT course_credit FROM Course WHERE course_semester = (:semester) ")
+    List<Integer> getEveryCreditBySemester(int semester);
+
+    @Query("SELECT course_grade FROM Course WHERE course_semester = (:semester) ")
+    List<Integer> getEveryGradeBySemester(int semester);
+
+
 
 
 }
