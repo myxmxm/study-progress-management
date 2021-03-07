@@ -12,6 +12,11 @@ import com.google.android.material.tabs.TabLayout;
 
 import fi.metropolia.team4studyprogressmanagement.fragment.PagerAdapter;
 
+/**
+ * This activity will show a tabView with 3 fragments which include all main functions of this app,
+ * such as edit, search, and statistic.
+ */
+
 public class TabActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -26,19 +31,12 @@ public class TabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabItemCourse = (TabItem) findViewById(R.id.tabItemCourse);
-        tabItemTools = (TabItem) findViewById(R.id.tabItemTools);
-        tabItemStatistic = (TabItem) findViewById(R.id.tabItemStatistic);
-
+        initialization();
+//create PagerAdapter instance
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,tabLayout.getTabCount());
-
+//set adapter for ViewPager instance
         viewPager.setAdapter(pagerAdapter);
-
+//change the tabs view when the tab is selected
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -55,5 +53,16 @@ public class TabActivity extends AppCompatActivity {
 
             }
         });
+    }
+//initialize toolbar, viewPager, tabLayout, and 3 tabs
+    private void initialization(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabItemCourse = (TabItem) findViewById(R.id.tabItemCourse);
+        tabItemTools = (TabItem) findViewById(R.id.tabItemTools);
+        tabItemStatistic = (TabItem) findViewById(R.id.tabItemStatistic);
     }
 }
